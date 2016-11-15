@@ -1,6 +1,6 @@
 export default (Resource) => {
     
-    let resource = Resource[0].toLowerCase() + Resource.substring(1);
+    let resource = Resource.toLowerCase();
 
     let create = `
         let ${resource} = req.body;
