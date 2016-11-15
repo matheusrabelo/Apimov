@@ -41,5 +41,91 @@ describe("App", () => {
         expect(app.database.getById).to.be.equal(AppExpect.mysql.getById);
     });
 
+    it("Should build routes", () => {
+        app.config.src = "test/build/";
+        app.config.database = "mysql";
+        app.config.resource = "Testing";
+        app.config.properties = "";
+        app.config.routes = [
+            {
+                "method": "Post",
+                "additional": "",
+                "action": "",
+                "path": "/Testing"
+            },
+            {
+                "method": "Delete",
+                "additional": "",
+                "action": "",
+                "path": "/Testing"
+            },
+            {
+                "method": "Get",
+                "additional": "ByID",
+                "action": "",
+                "path": "/Testing"
+            }
+        ];
+        app.build();
+
+        expect(app.routes[0]).to.be.equal(AppExpect.routes[0]);
+        expect(app.routes[1]).to.be.equal(AppExpect.routes[1]);
+        expect(app.routes[2]).to.be.equal(AppExpect.routes[2]);
+    });
+
+    it("Should build router", () => {
+        app.config.src = "test/build/";
+        app.config.database = "mysql";
+        app.config.resource = "Testing";
+        app.config.properties = "";
+        app.config.routes = [
+            {
+                "method": "Post",
+                "additional": "",
+                "action": "",
+                "path": "/Testing/:id"
+            },
+            {
+                "method": "Delete",
+                "additional": "",
+                "action": "",
+                "path": "/Testing/:id"
+            },
+            {
+                "method": "Get",
+                "additional": "ByID",
+                "action": "",
+                "path": "/Testing/:id"
+            }
+        ];
+
+        app.config.middlewares = [
+            {
+                "name": "helmet",
+                "use": "helmet()",
+                "additional": "",
+                "from": "helmet"
+            },
+            {
+                "name": "morgan",
+                "use": `morgan("common", {stream: logStream})`,
+                "additional": `
+import fs from "fs";
+const logStream = fs.createWriteStream(path.join(__dirname, '../request.log'), {flags: 'a+'});`,
+                "from": "morgan"
+            },
+            {
+                "name": "authenticate",
+                "use": `authenticate`,
+                "additional": "",
+                "from": "../middlewares/authenticate"
+            }
+        ];
+
+        app.build();
+
+        expect(app.router).to.be.equal(AppExpect.router);
+    });
+
 
 });
