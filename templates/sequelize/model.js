@@ -9,16 +9,16 @@ export default (Resource, Dialect, Properties) => {
     import configuration from "../configuration.json";
     import logging from "./logging";
 
-    let sequelize = new Sequelize(configuration.mySQL.db, configuration.mySQL.user, configuration.mySQL.password, {
-        host: configuration.mySQL.host,
-        dialect: 'mysql',
+    let sequelize = new Sequelize(configuration.${Dialect}.db, configuration.${Dialect}.user, configuration.${Dialect}.password, {
+        host: configuration.${Dialect}.host,
+        dialect: '${dialect}',
         logging: logging,
         define: {
             timestamps: false
         }
     });
 
-    let ${Resource} = sequelize.define(configuration.mySQL.table, {
+    let ${Resource} = sequelize.define(configuration.${Dialect}.table, {
         CreatedAt: Sequelize.DATE,
         IsActive: Sequelize.BOOLEAN,
         ${Properties}

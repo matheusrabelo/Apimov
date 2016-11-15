@@ -17,7 +17,7 @@ export default class App{
         if(src == undefined) throw Error("Destination folder not found");
         if(resource == undefined) throw Error("Resource not found");
         if(this.config.database == "mysql"){
-            this.model = SequelizeModel(resource, "mysql", this.config.properties);
+            this.model = SequelizeModel(resource, "mySQL", this.config.properties);
             this.database = SequelizeMysql(resource);
         }
     }
