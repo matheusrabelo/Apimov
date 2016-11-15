@@ -85,3 +85,70 @@ export const mySQLGet = `
     `;
 
 export const mysql = { "create": mySQLCreate, "remove" : mySQLRemove, "get": mySQLGet, "getByID": mySQLGetByID};
+
+export const routes = [
+`
+"use strict";
+
+import Testing from "../database/model";
+
+export default function postTesting(req, res){
+    
+};
+`
+,
+`
+"use strict";
+
+import Testing from "../database/model";
+
+export default function deleteTesting(req, res){
+    
+};
+`
+,
+`
+"use strict";
+
+import Testing from "../database/model";
+
+export default function getTestingByID(req, res){
+    
+};
+`
+];
+
+export const router = `
+"use strict";
+
+import express from "express";
+import bodyParser from "body-parser";
+import helmet from "helmet";
+import morgan from "morgan";
+import authenticate from "../middlewares/authenticate";
+
+import postTesting from "../routes/postTesting";
+import deleteTesting from "../routes/deleteTesting";
+import getTesting from "../routes/getTestingByID";
+
+
+let router = express.Router();
+
+router.use(bodyParser.json());
+
+router.use(helmet());
+
+import fs from "fs";
+const logStream = fs.createWriteStream(path.join(__dirname, '../request.log'), {flags: 'a+'});
+router.use(morgan("common", {stream: logStream}));
+
+router.use(authenticate);
+
+
+router.post("/Testing/:id", postTesting);
+router.delete("/Testing/:id", deleteTesting);
+router.get("/Testing/:id", getTestingByID);
+
+
+export default router;
+`;
