@@ -51,31 +51,12 @@ describe("App", () => {
         app.config.resource = "Testing";
         app.config.properties = "";
         app.config.middlewares = new Array();
-        app.config.routes = [
-            {
-                "method": "Post",
-                "additional": "",
-                "action": "",
-                "path": "/Testing"
-            },
-            {
-                "method": "Delete",
-                "additional": "",
-                "action": "",
-                "path": "/Testing"
-            },
-            {
-                "method": "Get",
-                "additional": "ByID",
-                "action": "",
-                "path": "/Testing"
-            }
-        ];
+        app.config.routes = ["post", "remove", "get"];
         app.build();
 
-        expect(app.routes[0]).to.be.equal(AppExpect.routes[0]);
-        expect(app.routes[1]).to.be.equal(AppExpect.routes[1]);
-        expect(app.routes[2]).to.be.equal(AppExpect.routes[2]);
+        expect(app.routes[0].code).to.be.equal(AppExpect.routes[0]);
+        expect(app.routes[1].code).to.be.equal(AppExpect.routes[1]);
+        expect(app.routes[2].code).to.be.equal(AppExpect.routes[2]);
     });
 
     it("Should build router", () => {
@@ -83,28 +64,8 @@ describe("App", () => {
         app.config.database = "mysql";
         app.config.resource = "Testing";
         app.config.properties = "";
-        app.config.routes = [
-            {
-                "method": "Post",
-                "additional": "",
-                "action": "",
-                "path": "/Testing/:id"
-            },
-            {
-                "method": "Delete",
-                "additional": "",
-                "action": "",
-                "path": "/Testing/:id"
-            },
-            {
-                "method": "Get",
-                "additional": "ByID",
-                "action": "",
-                "path": "/Testing/:id"
-            }
-        ];
-
         app.config.middlewares = ["helmet", "morgan"];
+        app.config.routes = ["post", "remove", "get"];
 
         app.build();
 

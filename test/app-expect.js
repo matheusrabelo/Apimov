@@ -87,22 +87,43 @@ export const mySQLGet = `
 export const mysql = { "create": mySQLCreate, "remove" : mySQLRemove, "get": mySQLGet, "getByID": mySQLGetByID};
 
 export const routes = [
-`
-"use strict";
+`"use strict";
 
 import Testing from "../database/model";
 
 export default function postTesting(req, res){
     
+        let testing = req.body;
+        testing.IsActive = '1';
+
+        Testing.create(testing)
+            .then((response) => {
+                res.status(201);
+                res.json(response);
+            })
+            .catch((response) => {
+                res.status(500);
+                res.json(response);
+            });
+    
 };
 `
 ,
-`
-"use strict";
+`"use strict";
 
 import Testing from "../database/model";
 
-export default function deleteTesting(req, res){
+export default function removeTesting(req, res){
+    
+        Testing.findOne({where: ['id = ?', req.params.id]})
+                .then(() => {
+                    return Testing.update({
+                    'IsActive': 0
+                    }, {where: ['id = ?', req.params.id]});
+                });
+        
+        res.status(202);
+        res.json({});
     
 };
 `
@@ -112,7 +133,28 @@ export default function deleteTesting(req, res){
 
 import Testing from "../database/model";
 
-export default function getTestingByID(req, res){
+export default function getTesting(req, res){
+    
+        let args = {};
+        args.where = ['isActive'];
+
+        if(req.query.from){
+            args.offset = parseInt(req.query.from);
+        }
+
+        if(req.query.pageSize){
+            args.limit = parseInt(req.query.pageSize);
+        }
+
+        if(req.query.page){
+            args.offset = (parseInt(req.query.page) - 1) * 10;
+            args.limit = 10;
+        }
+
+        Testing.findAll(args).then(testing => {
+            res.status(202);
+            res.json(testing);
+        });
     
 };
 `
@@ -127,7 +169,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 
 import postTesting from "../routes/postTesting";
-import deleteTesting from "../routes/deleteTesting";
+import removeTesting from "../routes/removeTesting";
 import getTesting from "../routes/getTesting";
 
 let router = express.Router();
@@ -136,8 +178,8 @@ router.use(helmet());
 import fs from "fs";
 router.use(morgan("common", {stream: fs.createWriteStream('../request.log', {flags: 'a+'})}));
 
-router.post("/Testing/:id)", postTesting);
-router.delete("/Testing/:id)", deleteTesting);
-router.get("/Testing/:id)", getTesting);
+router.post("/Testing", postTesting);
+router.delete("/Testing/:id", removeTesting);
+router.get("/Testing", getTesting);
 
 export default router;`;
