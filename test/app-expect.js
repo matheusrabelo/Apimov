@@ -125,30 +125,19 @@ import express from "express";
 import bodyParser from "body-parser";
 import helmet from "helmet";
 import morgan from "morgan";
-import authenticate from "../middlewares/authenticate";
 
 import postTesting from "../routes/postTesting";
 import deleteTesting from "../routes/deleteTesting";
-import getTesting from "../routes/getTestingByID";
-
+import getTesting from "../routes/getTesting";
 
 let router = express.Router();
-
 router.use(bodyParser.json());
-
 router.use(helmet());
-
 import fs from "fs";
-const logStream = fs.createWriteStream(path.join(__dirname, '../request.log'), {flags: 'a+'});
-router.use(morgan("common", {stream: logStream}));
+router.use(morgan("common", {stream: fs.createWriteStream('../request.log', {flags: 'a+'})}));
 
-router.use(authenticate);
+router.post("/Testing/:id)", postTesting);
+router.delete("/Testing/:id)", deleteTesting);
+router.get("/Testing/:id)", getTesting);
 
-
-router.post("/Testing/:id", postTesting);
-router.delete("/Testing/:id", deleteTesting);
-router.get("/Testing/:id", getTestingByID);
-
-
-export default router;
-`;
+export default router;`;

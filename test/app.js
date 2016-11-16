@@ -23,9 +23,11 @@ describe("App", () => {
         app.config.database = "mysql";
         app.config.resource = "Testing";
         app.config.properties = "";
+        app.config.middlewares = new Array();
+        app.config.routes = new Array();
         app.build();
 
-        expect(app.model).to.be.equal(AppExpect.model);
+        expect(app.database.model).to.be.equal(AppExpect.model);
     });
 
     it("Should build mysql methods", () => {
@@ -33,12 +35,14 @@ describe("App", () => {
         app.config.database = "mysql";
         app.config.resource = "Testing";
         app.config.properties = "";
+        app.config.middlewares = new Array();
+        app.config.routes = new Array();
         app.build();
-
-        expect(app.database.create).to.be.equal(AppExpect.mysql.create);
-        expect(app.database.remove).to.be.equal(AppExpect.mysql.remove);
-        expect(app.database.get).to.be.equal(AppExpect.mysql.get);
-        expect(app.database.getById).to.be.equal(AppExpect.mysql.getById);
+        
+        expect(app.database.methods.create).to.be.equal(AppExpect.mysql.create);
+        expect(app.database.methods.remove).to.be.equal(AppExpect.mysql.remove);
+        expect(app.database.methods.get).to.be.equal(AppExpect.mysql.get);
+        expect(app.database.methods.getById).to.be.equal(AppExpect.mysql.getById);
     });
 
     it("Should build routes", () => {
@@ -46,6 +50,7 @@ describe("App", () => {
         app.config.database = "mysql";
         app.config.resource = "Testing";
         app.config.properties = "";
+        app.config.middlewares = new Array();
         app.config.routes = [
             {
                 "method": "Post",
@@ -99,28 +104,7 @@ describe("App", () => {
             }
         ];
 
-        app.config.middlewares = [
-            {
-                "name": "helmet",
-                "use": "helmet()",
-                "additional": "",
-                "from": "helmet"
-            },
-            {
-                "name": "morgan",
-                "use": `morgan("common", {stream: logStream})`,
-                "additional": `
-import fs from "fs";
-const logStream = fs.createWriteStream(path.join(__dirname, '../request.log'), {flags: 'a+'});`,
-                "from": "morgan"
-            },
-            {
-                "name": "authenticate",
-                "use": `authenticate`,
-                "additional": "",
-                "from": "../middlewares/authenticate"
-            }
-        ];
+        app.config.middlewares = ["helmet", "morgan"];
 
         app.build();
 
