@@ -4,7 +4,7 @@ import fs from "fs";
 
 import SequelizeModel from "../templates/sequelize/model";
 import SequelizeMysql from "../templates/sequelize/mysql";
-
+import Middlewaresbuild from "./middlewares";
 
 export default class App{
 
@@ -20,6 +20,7 @@ export default class App{
             this.model = SequelizeModel(resource, "mySQL", this.config.properties);
             this.database = SequelizeMysql(resource);
         }
-    }
 
-}
+        this.middlewares = Middlewaresbuild(this.config);
+    }
+  }
