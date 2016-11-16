@@ -3,7 +3,7 @@
 import fs from "fs";
 
 import Databases from "../templates/databases";
-import Routes from "../templates/routes/routes";
+import Routes from "../templates/routes";
 import Router from "../templates/app/router";
 import Middlewares from "../templates/middlewares";
 
@@ -25,7 +25,7 @@ export default class App{
         this.routes = new Array();
         if(routes != undefined){
             routes.forEach(route => {
-                this.routes.push(Routes(this, route));
+                this.routes.push(Routes[route](this));
             });
         }
     }
