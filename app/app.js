@@ -2,11 +2,10 @@
 
 import fs from "fs";
 
-import SequelizeModel from "../templates/sequelize/model";
-import SequelizeMysql from "../templates/sequelize/mysql";
+import Databases from "../templates/databases";
 import Routes from "../templates/routes/routes";
 import Router from "../templates/app/router";
-
+import Middlewares from "../templates/middlewares";
 
 export default class App{
 
@@ -15,10 +14,9 @@ export default class App{
     }
 
     buildDatabase(){
-        const { resource } = this.config;
-        if(this.config.database == "mysql"){
-            this.model = SequelizeModel(resource, "mySQL", this.config.properties);
-            this.database = SequelizeMysql(resource);
+        const { database } = this.config;
+        if(database != undefined){
+            this.database = Databases[database](this);
         }
     }
 
@@ -27,18 +25,20 @@ export default class App{
         this.routes = new Array();
         if(routes != undefined){
             routes.forEach(route => {
-                this.routes.push(
-                    Routes(resource, route.method, route.action, route.additional)
-                );
+                this.routes.push(Routes(this, route));
             });
         }
     }
 
     buildRouter(){
-        const { routes, middlewares, resource } = this.config;
-        if(middlewares != undefined && routes != undefined){
-            this.router = Router(resource, routes, middlewares);
+        const { middlewares } = this.config;
+        this.middlewares = new Array();
+        if(middlewares != undefined){
+            middlewares.forEach(middleware => {
+                this.middlewares.push(Middlewares[middleware](this));
+            });
         }
+        this.router = Router(this);
     }
 
     build() {
