@@ -1,5 +1,6 @@
-import helmet from "./helmet"
+import helmet from "./helmet";
+import morgan from "./morgan";
 
-module.exports = {
-  helmet: helmet
-}
+export default {
+    helmet, morgan
+};
