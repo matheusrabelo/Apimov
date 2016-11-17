@@ -21,7 +21,7 @@ export default class App{
             this.database = Databases[database](this);
           }
           catch(e){
-            console.log(`Database: ${database} mising in library`);
+            throw new Error("Missing Database library for: " + database);
           }
         }
     }
@@ -35,7 +35,7 @@ export default class App{
                 this.routes.push(Routes[route](this));
               }
               catch(e){
-                console.log(`Routes: ${route} mising in library`);
+                throw new Error("Missing Route library for: " + route);
               }
             });
         }
@@ -50,7 +50,7 @@ export default class App{
                 this.middlewares.push(Middlewares[middleware](this));
               }
               catch(e){
-                console.log(`Middleware: ${middleware} mising in library`);
+                throw new Error("Missing Middleware library for: " + middleware);
               }
             });
         }
@@ -59,11 +59,16 @@ export default class App{
 
     build() {
         const { src, resource } = this.config;
-        if(src == undefined) throw Error("Destination folder not found");
-        if(resource == undefined) throw Error("Resource not found");
+        if(src == undefined)  throw new Error("Build failed!\n Destination folder not found");
+        if(resource == undefined) throw new Error("Build failed!\n Resource not found");
 
-        this.buildDatabase();
-        this.buildRoutes();
-        this.buildRouter();
+        try{
+          this.buildDatabase();
+          this.buildRoutes();
+          this.buildRouter();
+        }
+        catch(e){
+            throw new Error("Build failed!\n" + e.message);
+        }
     }
   }
