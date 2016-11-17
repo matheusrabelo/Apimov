@@ -1,6 +1,6 @@
 #Apimov
 
-[![Build Status](https://travis-ci.org/matheusrabelo/Apimov.svg?branch=master)](https://travis-ci.org/matheusrabelo/Apimov) [![Coverage Status](https://coveralls.io/repos/github/matheusrabelo/Apimov/badge.svg?branch=master)](https://coveralls.io/github/matheusrabelo/Apimov?branch=master)
+[![npm version](https://badge.fury.io/js/apimov.svg)](https://badge.fury.io/js/apimov) [![Build Status](https://travis-ci.org/matheusrabelo/Apimov.svg?branch=master)](https://travis-ci.org/matheusrabelo/Apimov) [![Coverage Status](https://coveralls.io/repos/github/matheusrabelo/Apimov/badge.svg?branch=master)](https://coveralls.io/github/matheusrabelo/Apimov?branch=master)
 
 ##About
 
@@ -39,7 +39,7 @@ try{
 }
 ```
 
-The generated API it's on api object.
+The generated API is on api object.
 
 ##Scripts
 - Use **npm start** to run nodemon
