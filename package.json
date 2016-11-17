@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon index.js --exec babel-node",
     "test": "mocha --compilers js:babel-register",
-    "cover": "babel-node node_modules/babel-istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- test --recursive"
+    "coverage": "babel-node node_modules/babel-istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- test --recursive",
+    "coveralls": "babel-node node_modules/babel-istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- test --recursive && cat coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
