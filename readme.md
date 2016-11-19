@@ -23,11 +23,12 @@ At this moment, you need to do manually:
 import apimov from "apimov";
 
 const config = {
-    "src": "test/build/",
+    "src": "../build",
     "resource": "Books",
+    "database": "mysql",
     "properties": "",
     "middlewares": ["helmet", "morgan"],
-    "routes": ["post", "get"]
+    "routes": ["post", "delete", "get"]
 };
 
 const api = new apimov(config);
@@ -39,12 +40,12 @@ try{
 }
 ```
 
-The generated API is on api object.
+The generated API is on specified destination folder.
 
 ##Scripts
-- Use **npm start** to run nodemon
-- Use **npm test** to run tests
-- Use **npm coverage** to get test coverage
+- Use **npm run start** to run nodemon
+- Use **npm run test** to run tests
+- Use **npm run coverage** to get test coverage
 
 ##Authors
 - Matheus Freire Rabelo

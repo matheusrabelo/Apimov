@@ -1,13 +1,13 @@
 export default (app) => {
     
     let Resource = app.config.resource;
-    let action = app.database.methods.create;
+    let action = app.database.methods.post;
 
 return {
+    "file": `post${Resource}.js`,
     "route": "post",
-    "method": "post",
     "path": `${Resource}`,
-    "code": `"use strict";
+    "source": `"use strict";
 
 import ${Resource} from "../database/model";
 

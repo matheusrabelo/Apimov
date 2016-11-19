@@ -1,11 +1,12 @@
 "use strict";
 
-import fs from "fs";
-
 import Databases from "../templates/databases";
 import Routes from "../templates/routes";
+import Application from "../templates/app/app";
+import Index from "../templates/index";
 import Router from "../templates/app/router";
 import Middlewares from "../templates/middlewares";
+import Writer from "./writer";
 
 
 export default class App{
@@ -14,11 +15,18 @@ export default class App{
         this.config = config;
     }
 
+    buildBasic(){
+      this.api.app = [Application];
+      this.api.index = Index;
+    }
+
     buildDatabase(){
         const { database } = this.config;
+        this.api.database = new Array();
         if(database != undefined){
           try{
             this.database = Databases[database](this);
+            this.api.database.push(this.database.model);
           }
           catch(e){
             throw new Error("Missing Database library for: " + database);
@@ -28,11 +36,11 @@ export default class App{
 
     buildRoutes(){
         const { routes, resource } = this.config;
-        this.routes = new Array();
+        this.api.routes = new Array();
         if(routes != undefined){
             routes.forEach(route => {
               try{
-                this.routes.push(Routes[route](this));
+                this.api.routes.push(Routes[route](this));
               }
               catch(e){
                 throw new Error("Missing Route library for: " + route);
@@ -43,29 +51,32 @@ export default class App{
 
     buildRouter(){
         const { middlewares } = this.config;
-        this.middlewares = new Array();
+        this.api.middlewares = new Array();
         if(middlewares != undefined){
             middlewares.forEach(middleware => {
               try{
-                this.middlewares.push(Middlewares[middleware](this));
+                this.api.middlewares.push(Middlewares[middleware](this));
               }
               catch(e){
                 throw new Error("Missing Middleware library for: " + middleware);
               }
             });
         }
-        this.router = Router(this);
+        this.api.app.push(Router(this));
     }
 
     build() {
-        const { src, resource } = this.config;
-        if(src == undefined)  throw new Error("Build failed!\n Destination folder not found");
-        if(resource == undefined) throw new Error("Build failed!\n Resource not found");
+        this.config.src = this.config.src || "/";
+        if(this.config.resource == undefined) throw new Error("Build failed!\n Resource not found");
 
         try{
+          this.api = {};
+          this.buildBasic();
           this.buildDatabase();
           this.buildRoutes();
           this.buildRouter();
+          let writer = new Writer(this);
+          writer.writeFiles();
         }
         catch(e){
             throw new Error("Build failed!\n" + e.message);

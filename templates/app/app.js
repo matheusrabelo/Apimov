@@ -1,4 +1,6 @@
-export default `"use strict";
+export default {
+    "file": "app.js",
+    "source": `"use strict";
 
 import express from "express";
 import router from "./router";
@@ -10,4 +12,4 @@ app.use(express.static('public'));
 app.use(router);
 
 export default app;
-`;
+`};
