@@ -1,8 +1,11 @@
-import get from "./get";
-import getByID from "./getByID";
-import post from "./post";
-import remove from "./remove";
+import getRoute from "./get";
+import getByIDRoute from "./getByID";
+import postRoute from "./post";
+import deleteRoute from "./delete";
 
 export default {
-    get, getByID, post, remove
+    "get": getRoute, 
+    "getByID": getByIDRoute, 
+    "post": postRoute, 
+    "delete": deleteRoute
 };
