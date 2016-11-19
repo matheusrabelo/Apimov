@@ -1,10 +1,11 @@
 {
   "name": "apimov",
-  "version": "0.0.2",
-  "description": "",
+  "version": "0.0.3",
+  "description": "Node.js API Generator",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js --exec babel-node",
+    "start2": "nodemon using.ijs --exec babel-node",
     "test": "mocha --compilers js:babel-register",
     "coverage": "babel-node node_modules/babel-istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- test --recursive",
     "coveralls": "babel-node node_modules/babel-istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- test --recursive && cat coverage/lcov.info | coveralls"
@@ -29,6 +30,8 @@
     "babel-register": "^6.18.0",
     "chai": "^3.5.0",
     "coveralls": "^2.11.15",
-    "mocha": "^3.1.2"
+    "mkdirp": "^0.5.1",
+    "mocha": "^3.1.2",
+    "rimraf": "^2.5.4"
   }
 }
