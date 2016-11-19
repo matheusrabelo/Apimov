@@ -113,7 +113,7 @@ export default function postTesting(req, res){
 
 import Testing from "../database/model";
 
-export default function removeTesting(req, res){
+export default function deleteTesting(req, res){
     
         Testing.findOne({where: ['id = ?', req.params.id]})
                 .then(() => {
@@ -169,7 +169,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 
 import postTesting from "../routes/postTesting";
-import removeTesting from "../routes/removeTesting";
+import deleteTesting from "../routes/deleteTesting";
 import getTesting from "../routes/getTesting";
 
 let router = express.Router();
@@ -179,7 +179,7 @@ import fs from "fs";
 router.use(morgan("common", {stream: fs.createWriteStream('../request.log', {flags: 'a+'})}));
 
 router.post("/Testing", postTesting);
-router.delete("/Testing/:id", removeTesting);
+router.delete("/Testing/:id", deleteTesting);
 router.get("/Testing", getTesting);
 
 export default router;`;
