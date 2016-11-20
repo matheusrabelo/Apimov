@@ -158,6 +158,25 @@ export default function getTesting(req, res){
     
 };
 `
+,
+`
+"use strict";
+
+import Testing from "../database/model";
+
+export default function getByIDTesting(req, res){
+    
+        let args = {};
+        args.where = ['isActive AND id = ?', req.params.id];
+
+        Testing.findOne(args).then(testing => {
+            if (testing == null) testing = {};
+            res.status(202);
+            res.json(testing);
+        });
+    
+};
+`
 ];
 
 export const router = `
@@ -171,6 +190,7 @@ import morgan from "morgan";
 import postTesting from "../routes/postTesting";
 import deleteTesting from "../routes/deleteTesting";
 import getTesting from "../routes/getTesting";
+import getByIDTesting from "../routes/getByIDTesting";
 
 let router = express.Router();
 router.use(bodyParser.json());
@@ -181,5 +201,6 @@ router.use(morgan("common", {stream: fs.createWriteStream('../request.log', {fla
 router.post("/Testing", postTesting);
 router.delete("/Testing/:id", deleteTesting);
 router.get("/Testing", getTesting);
+router.get("/Testing/:id", getByIDTesting);
 
 export default router;`;

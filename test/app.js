@@ -22,17 +22,7 @@ describe("App", () => {
     });
 
     it("Should throw error", () => {
-        expect(app.build).to.throw(Error);
-    });
-
-    it("Should throw error for missing src", () => {
-        app.config.database = "mysql";
-        app.config.resource = "Testing";
-        app.config.properties = "";
-        app.config.middlewares = new Array();
-        app.config.routes = new Array();
-        expect(app.build).to.throw(Error);
-
+        expect(() => app.build()).to.throw(Error);
     });
 
     it("Should throw error for missing resource", () => {
@@ -41,8 +31,8 @@ describe("App", () => {
         app.config.properties = "";
         app.config.middlewares = new Array();
         app.config.routes = new Array();
-        expect(app.build).to.throw(Error);
 
+        expect(() => app.build()).to.throw(Error);
     });
 
     it("Should build mysql model", () => {
@@ -64,8 +54,8 @@ describe("App", () => {
         app.config.properties = "";
         app.config.middlewares = new Array();
         app.config.routes = new Array();
-        expect(app.build).to.throw(Error);
 
+        expect(() => app.build()).to.throw(Error);
     });
 
     it("Should build mysql methods", () => {
@@ -104,7 +94,8 @@ describe("App", () => {
         app.config.properties = "";
         app.config.middlewares = new Array();
         app.config.routes = ["post", "delete", "get", "testError"];
-        expect(app.build).to.throw(Error);
+        
+        expect(() => app.build()).to.throw(Error);
     });
 
     it("Should build router", () => {
@@ -113,7 +104,7 @@ describe("App", () => {
         app.config.resource = "Testing";
         app.config.properties = "";
         app.config.middlewares = ["helmet", "morgan"];
-        app.config.routes = ["post", "delete", "get"];
+        app.config.routes = ["post", "delete", "get", "getByID"];
 
         app.build();
 
@@ -128,15 +119,7 @@ describe("App", () => {
         app.config.middlewares = ["helmet", "morgan"];
         app.config.routes = ["post", "delete", "get", "testError"];
 
-        expect(app.build).to.throw(Error);
-    });
-
-    it("Should throw error for missing middleware config", () => {
-        app.config.src = "../test/build/";
-        app.config.database = "mysql";
-        app.config.resource = "Testing";
-        app.config.properties = "";
-        expect(app.build).to.throw(Error);
+        expect(() => app.build()).to.throw(Error);
     });
 
     it("Should build empty array of middlewares", () => {
@@ -172,6 +155,8 @@ describe("App", () => {
         app.config.resource = "Testing";
         app.config.properties = "";
         app.config.middlewares = ["helmet", "testError"];
-        expect(app.build).to.throw(Error);
+
+        expect(() => app.build()).to.throw(Error);
     });
+
 });
