@@ -6,6 +6,7 @@ export default (app) => {
 return {
     "file": `post${Resource}.js`,
     "route": "post",
+    "method": "post",
     "path": `${Resource}`,
     "source": `"use strict";
 

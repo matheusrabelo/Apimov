@@ -12,7 +12,7 @@ export default class Writer{
     }
 
     writeFile(src, file){
-        mkdirp(src, function(err) { 
+        mkdirp(src, err => { 
             if (err) throw new Error("Failed to create directory " + src + ": " + err.message);
             fs.writeFile(path.join(src, file.file), file.source, { "flag" : "w+" } , (err) => {
                 if (err) throw new Error("Failed to write " + file.file + ": " + err.message);

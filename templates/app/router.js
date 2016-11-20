@@ -14,7 +14,7 @@ import bodyParser from "body-parser";
     router += `\n`;
 
     app.api.routes.forEach(route => {
-        router += `import ${route.route}${app.config.resource} from "../routes/${route.route.toLowerCase()}${app.config.resource}";\n`;
+        router += `import ${route.route}${app.config.resource} from "../routes/${route.route}${app.config.resource}";\n`;
     });
 
     router += `\nlet router = express.Router();\n`;
@@ -28,7 +28,7 @@ import bodyParser from "body-parser";
     router += `\n`;
 
     app.api.routes.forEach(route => {
-        router += `router.${route.route.toLowerCase()}("/${route.path}", ${route.route.toLowerCase()}${app.config.resource});\n`;
+        router += `router.${route.method}("/${route.path}", ${route.route}${app.config.resource});\n`;
     });
 
     router += `\nexport default router;`;
