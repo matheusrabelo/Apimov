@@ -6,6 +6,7 @@ export default (app) => {
 return {
     "file": `delete${Resource}.js`,
     "route": "delete",
+    "method": "delete",
     "path": `${Resource}/:id`,
     "source": `"use strict";
 

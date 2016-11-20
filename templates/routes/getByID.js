@@ -6,6 +6,7 @@ export default (app) => {
 return {
     "file": `getByID${Resource}.js`,
     "route": "getByID",
+    "method": "get",
     "path": `${Resource}/:id`,
     "source": `"use strict";
 
