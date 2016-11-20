@@ -91,7 +91,16 @@ export default (app) => {
     `;
 
     return {
-        model, "methods": { create, remove, getByID, get }
+        "model": {
+            "file": "model.js",
+            "source": model
+        },
+        "methods": { 
+            "post": create, 
+            "delete": remove, 
+            "getByID": getByID, 
+            "get": get
+        }
     };
 
 };

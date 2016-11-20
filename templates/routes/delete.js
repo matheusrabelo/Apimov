@@ -1,17 +1,18 @@
 export default (app) => {
     
     let Resource = app.config.resource;
-    let action = app.database.methods.remove;
+    let action = app.database.methods.delete;
 
 return {
-    "route": "remove",
+    "file": `delete${Resource}.js`,
+    "route": "delete",
     "method": "delete",
     "path": `${Resource}/:id`,
-    "code": `"use strict";
+    "source": `"use strict";
 
 import ${Resource} from "../database/model";
 
-export default function remove${Resource}(req, res){
+export default function delete${Resource}(req, res){
     ${action}
 };
 `};

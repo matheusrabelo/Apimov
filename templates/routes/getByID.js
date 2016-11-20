@@ -4,10 +4,11 @@ export default (app) => {
     let action = app.database.methods.getByID;
 
 return {
+    "file": `getByID${Resource}.js`,
     "route": "getByID",
     "method": "get",
     "path": `${Resource}/:id`,
-    "code": `"use strict";
+    "source": `"use strict";
 
 import ${Resource} from "../database/model";
 

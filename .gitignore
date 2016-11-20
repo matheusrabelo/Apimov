@@ -47,3 +47,4 @@ jspm_packages
 .yarn-integrity
 
 .ijs
+.vscode/
