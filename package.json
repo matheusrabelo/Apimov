@@ -1,6 +1,6 @@
 {
   "name": "apimov",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Node.js API Generator",
   "main": "index.js",
   "scripts": {

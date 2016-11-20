@@ -15,10 +15,7 @@ describe("App", () => {
     });
 
     afterEach((done) => {
-        rimraf(path.join(__dirname, "../test/build"), err => {
-            if (err) throw err;
-            done();
-        })
+        rimraf(path.join(__dirname, "../test/build"), () => done());
     });
 
     it("Should throw error", () => {
