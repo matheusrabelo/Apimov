@@ -1,7 +1,7 @@
 "use strict";
 
 import Program from "commander";
-import PromptCommands from "./promptCommands";
+import Prompt from "./prompt";
 
 Program
   .version('0.0.1')
@@ -9,16 +9,16 @@ Program
 Program
   .command('init')
   .description('Run config and server builders')
-  .action(PromptCommands.init);
+  .action(Prompt.init);
 
 Program
   .command('build')
   .description('Run only server builder')
-  .action(PromptCommands.build);
+  .action(Prompt.build);
 
 Program
   .command('*')
-  .description('Run only server builder')
+  .description('Uknown option')
   .action(() => {console.log("Unknown option")});
 
 Program.parse(process.argv);
