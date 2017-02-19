@@ -33,16 +33,14 @@ export default class App {
     }
 
     buildRoutes() {
-        const atributes = this.config.resource.atributes;
+        const routes = this.config.resource.routes;
         this.api.routes = [];
-        atributes.forEach((atribute) => {
-          atribute.routes.forEach((route) => {
+        routes.forEach((route) => {
             try {
               this.api.routes.push(Routes[route.toLowerCase()](this));
             } catch(e) {
               throw new Error('Missing Route library for: ' + route);
             }
-          });
         });
     }
 

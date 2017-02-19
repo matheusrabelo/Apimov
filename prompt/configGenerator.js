@@ -19,6 +19,7 @@ export default (config) => {
     let dataElement = {};
     dataElement.name = yield prompt('Resource name: ');
     dataElement.atributes = [];
+    dataElement.routes = [];
 
     let innerAtribute = {};
 
@@ -27,18 +28,17 @@ export default (config) => {
     while ((atributesVar = yield prompt('Atribute name: ')) != '') {
       innerAtribute.name = atributesVar;
       innerAtribute.dataType = yield prompt('Data Type: ');
-      innerAtribute.routes = [];
     }
 
     console.log('Choose routes (y for Yes, n for No)');
     atributesBoolean = yield prompt('GET: '.cyan);
-    if(atributesBoolean = 'y') innerAtribute.routes.push('GET');
+    if(atributesBoolean = 'y') dataElement.routes.push('GET');
     atributesBoolean = yield prompt('GET BY ID: '.cyan);
-    if(atributesBoolean = 'y') innerAtribute.routes.push('GETBYID');
+    if(atributesBoolean = 'y') dataElement.routes.push('GETBYID');
     atributesBoolean = yield prompt('POST: '.cyan);
-    if(atributesBoolean = 'y') innerAtribute.routes.push('POST');
+    if(atributesBoolean = 'y') dataElement.routes.push('POST');
     atributesBoolean = yield prompt('DELETE: '.cyan);
-    if(atributesBoolean = 'y') innerAtribute.routes.push('DELETE');
+    if(atributesBoolean = 'y') dataElement.routes.push('DELETE');
 
     dataElement.atributes.push(innerAtribute);
 
