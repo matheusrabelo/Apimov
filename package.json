@@ -12,7 +12,7 @@
     "coveralls": "node_modules/.bin/babel-node node_modules/babel-istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- test --recursive && cat coverage/lcov.info | coveralls"
   },
   "bin": {
-    "apimov": "node_modules/.bin/babel-node program.js init"
+    "apimov": "babel-node program.js"
   },
   "repository": {
     "type": "git",

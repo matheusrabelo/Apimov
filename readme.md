@@ -22,7 +22,8 @@ $ npm install apimov -g
 ## Usage
 
 ```bash
-$ apimov
+$ apimov init #Create an apimov config file and build it
+$ apimov build #Build an apimov server from an existing apimov config file
 ```
 
 ![Usage](usage.gif)
