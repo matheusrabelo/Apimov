@@ -4,8 +4,10 @@
 
 ## About
 
-A minimalist, extensible Node.js REST API Generator. <br />
-Apimov creates fully tested node servers. You specify the desired middleware's, data elements, database and Apimov creates the server on your behalf. <br />
+A minimalist, extensible Node.js REST API Generator.
+
+Apimov creates fully tested node servers. You specify the desired middleware's, data elements, database and Apimov creates the server on your behalf.
+
 Less time coding, more time doing what you love.  
 
 
@@ -13,17 +15,17 @@ Less time coding, more time doing what you love.
 
 This library is distributed on **npm**. To install, run the following command:
 
-``` sh
+``` bash
 $ npm install apimov -g
 ```
 
 ## Usage
 
-At this moment, you need to do manually:
-
-```javascript
-nodemon program.js init --exec babel-node
+```bash
+$ apimov
 ```
+
+![Usage](usage.gif)
 
 The generated API is on specified destination folder.
 

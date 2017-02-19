@@ -17,7 +17,7 @@ export const model =  `
     let Testing = sequelize.define(configuration.mySQL.table, {
         CreatedAt: Sequelize.DATE,
         IsActive: Sequelize.BOOLEAN,
-        
+        title: Sequelize.STRING
     });
 
     export default Testing;
@@ -185,22 +185,19 @@ export const router = `
 import express from "express";
 import bodyParser from "body-parser";
 import helmet from "helmet";
-import morgan from "morgan";
 
-import postTesting from "../routes/postTesting";
-import deleteTesting from "../routes/deleteTesting";
 import getTesting from "../routes/getTesting";
 import getByIDTesting from "../routes/getByIDTesting";
+import postTesting from "../routes/postTesting";
+import deleteTesting from "../routes/deleteTesting";
 
 let router = express.Router();
 router.use(bodyParser.json());
 router.use(helmet());
-import fs from "fs";
-router.use(morgan("common", {stream: fs.createWriteStream('../request.log', {flags: 'a+'})}));
 
-router.post("/Testing", postTesting);
-router.delete("/Testing/:id", deleteTesting);
 router.get("/Testing", getTesting);
 router.get("/Testing/:id", getByIDTesting);
+router.post("/Testing", postTesting);
+router.delete("/Testing/:id", deleteTesting);
 
 export default router;`;

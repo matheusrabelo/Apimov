@@ -1,13 +1,17 @@
 {
   "name": "apimov",
-  "version": "0.0.4",
-  "description": "Node.js API Generator",
+  "version": "0.1.0",
+  "description": "Superheroic NodeJS web API Generator",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon program.js init --exec babel-node",
-    "test": "mocha --compilers js:babel-register",
-    "coverage": "babel-node node_modules/babel-istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- test --recursive",
-    "coveralls": "babel-node node_modules/babel-istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- test --recursive && cat coverage/lcov.info | coveralls"
+    "apimov": "node_modules/.bin/babel-node program.js init",
+    "start": "node_modules/.bin/nodemon program.js init --exec babel-node",
+    "test": "node_modules/.bin/_mocha --compilers js:babel-register",
+    "coverage": "node_modules/.bin/babel-node node_modules/babel-istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- test --recursive",
+    "coveralls": "node_modules/.bin/babel-node node_modules/babel-istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- test --recursive && cat coverage/lcov.info | coveralls"
+  },
+  "bin": {
+    "apimov": "node_modules/.bin/babel-node program.js init"
   },
   "repository": {
     "type": "git",
@@ -30,10 +34,12 @@
     "chai": "^3.5.0",
     "co": "^4.6.0",
     "co-prompt": "^1.0.0",
+    "colors": "^1.1.2",
     "commander": "^2.9.0",
     "coveralls": "^2.11.15",
     "mkdirp": "^0.5.1",
     "mocha": "^3.1.2",
+    "nodemon": "^1.11.0",
     "rimraf": "^2.5.4"
   }
 }

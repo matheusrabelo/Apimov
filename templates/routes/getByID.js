@@ -1,6 +1,6 @@
 export default (app) => {
     
-    let Resource = app.config.resource;
+    let Resource = app.config.resource.name;
     let action = app.database.methods.getByID;
 
 return {
