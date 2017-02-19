@@ -3,6 +3,7 @@
 import path from "path";
 import fs from "fs";
 import mkdirp from "mkdirp";
+import process from "process";
 
 export default class Writer{
 
@@ -21,7 +22,7 @@ export default class Writer{
     }
 
     writeFiles(){
-        let src = path.join(__dirname, this.config.src);
+        let src = path.join(process.cwd(), this.config.src);
         for (let prop in this.api) {
             if(Array.isArray(this.api[prop])){
                 this.api[prop].forEach(item => {

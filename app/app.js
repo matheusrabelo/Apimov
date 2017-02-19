@@ -8,7 +8,6 @@ import Router from "../templates/app/router";
 import Middlewares from "../templates/middlewares";
 import Writer from "./writer";
 
-
 export default class App{
 
     constructor(config){
@@ -29,24 +28,26 @@ export default class App{
             this.api.database.push(this.database.model);
           }
           catch(e){
-            throw new Error("Missing Database library for: " + database);
+            throw e;
+            // throw new Error("Missing Database library for: " + database);
           }
         }
     }
 
     buildRoutes(){
-        const { routes, resource } = this.config;
+        const atributes = this.config.resource.atributes;
+        const resource = this.config.resource.name;
         this.api.routes = new Array();
-        if(routes != undefined){
-            routes.forEach(route => {
-              try{
-                this.api.routes.push(Routes[route](this));
-              }
-              catch(e){
-                throw new Error("Missing Route library for: " + route);
-              }
-            });
-        }
+        atributes.forEach(atribute => {
+          atribute.routes.forEach(route => {
+            try{
+              this.api.routes.push(Routes[route.toLowerCase()](this));
+            }
+            catch(e){
+              throw new Error("Missing Route library for: " + route);
+            }
+          });
+        });
     }
 
     buildRouter(){
@@ -66,8 +67,9 @@ export default class App{
     }
 
     build() {
-        this.config.src = this.config.src || "/";
-        if(this.config.resource == undefined) throw new Error("Build failed!\n Resource not found");
+        if(!this.config.src) {
+          throw new Error("Build failed!\n Source not found");
+        }
 
         try{
           this.api = {};
