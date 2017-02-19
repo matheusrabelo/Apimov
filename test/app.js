@@ -68,7 +68,7 @@ describe('Apimov', () => {
     });
 
     it('Should not build routes on missing library', () => {
-        configuration.resource.atributes[0].routes.push('testMissingRoute');
+        configuration.resource.routes.push('testMissingRoute');
         app = new App(configuration);
 
         expect(() => app.build()).to.throw(Error);
@@ -81,7 +81,7 @@ describe('Apimov', () => {
     });
 
     it('Should not build router on missing library', () => {
-        configuration.resource.atributes[0].routes.push('testMissingRoute');
+        configuration.resource.routes.push('testMissingRoute');
         app = new App(configuration);
 
         expect(() => app.build()).to.throw(Error);

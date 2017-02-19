@@ -9,14 +9,14 @@
     "atributes": [
       {
         "name": "title",
-        "dataType": "Sequelize.STRING",
-        "routes": [
-          "GET",
-          "GETBYID",
-          "POST",
-          "DELETE"
-        ]
+        "dataType": "Sequelize.STRING"
       }
+    ],
+    "routes": [
+      "GET",
+      "GETBYID",
+      "POST",
+      "DELETE"
     ]
   }
 }
