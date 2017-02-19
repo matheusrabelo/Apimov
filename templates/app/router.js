@@ -14,7 +14,7 @@ import bodyParser from "body-parser";
     router += `\n`;
 
     app.api.routes.forEach(route => {
-        router += `import ${route.route}${app.config.resource} from "../routes/${route.route}${app.config.resource}";\n`;
+        router += `import ${route.route}${app.config.resource.name} from "../routes/${route.route}${app.config.resource.name}";\n`;
     });
 
     router += `\nlet router = express.Router();\n`;
@@ -28,7 +28,7 @@ import bodyParser from "body-parser";
     router += `\n`;
 
     app.api.routes.forEach(route => {
-        router += `router.${route.method}("/${route.path}", ${route.route}${app.config.resource});\n`;
+        router += `router.${route.method}("/${route.path}", ${route.route}${app.config.resource.name});\n`;
     });
 
     router += `\nexport default router;`;

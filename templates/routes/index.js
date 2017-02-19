@@ -5,7 +5,7 @@ import deleteRoute from "./delete";
 
 export default {
     "get": getRoute, 
-    "getByID": getByIDRoute, 
+    "getbyid": getByIDRoute, 
     "post": postRoute, 
     "delete": deleteRoute
 };

@@ -1,7 +1,15 @@
 export default (app) => {
 
-    let Resource = app.config.resource;
-    let Properties = app.config.properties;
+    let Resource = app.config.resource.name;
+    let Properties = "";
+    app.config.resource.atributes.forEach((item, i) => {
+        let comma = ',';
+        if (i === app.config.resource.atributes.length - 1) {
+            comma = '';
+        };
+        Properties += `
+        ${item.name}: ${item.dataType}${comma}`;
+    });
     let resource = Resource.toLowerCase();
 
     let model =  `
@@ -22,8 +30,7 @@ export default (app) => {
 
     let ${Resource} = sequelize.define(configuration.mySQL.table, {
         CreatedAt: Sequelize.DATE,
-        IsActive: Sequelize.BOOLEAN,
-        ${Properties}
+        IsActive: Sequelize.BOOLEAN,${Properties}
     });
 
     export default ${Resource};
