@@ -1,9 +1,9 @@
 import prompt from 'co-prompt';
-import colors from 'colors';
+import 'colors';
 
 export default (config) => {
-  return function * () {
-    let foo, bar;
+  return function* () {
+    let foo;
     console.log('Welcome to Apimov!'.blue);
     console.log('Please fill in the configuration.'.blue);
     config.src = yield prompt('Source Directory: ');
@@ -11,7 +11,7 @@ export default (config) => {
 
     console.log('Enter middlewares, input empty when finished'.yellow);
     config.middlewares = [];
-    while((foo = yield prompt('Middleware: ')) != "") {
+    while((foo = yield prompt('Middleware: ')) != '') {
       config.middlewares.push(foo);
     }
 
@@ -21,12 +21,13 @@ export default (config) => {
 
     let innerAtribute = {};
 
-    console.log('Enter atributes, input empty as the name when finished'.yellow);
-    while((foo = yield prompt('Atribute name: ')) != "") {
-      innerAtribute.name =  foo;
+    console.log('Enter atributes, input empty'.yellow +
+      'as the name when finished'.yellow);
+    while((foo = yield prompt('Atribute name: ')) != '') {
+      innerAtribute.name = foo;
       innerAtribute.dataType = yield prompt('Data Type: ');
       innerAtribute.routes = [];
-      console.log('Choose routes (y for Yes, n for No)'.yellow)
+      console.log('Choose routes (y for Yes, n for No)'.yellow);
       bar = yield prompt('GET: '.cyan);
       if(bar = 'y') innerAtribute.routes.push('GET');
       bar = yield prompt('GET BY ID: '.cyan);
@@ -42,4 +43,4 @@ export default (config) => {
     config.resource = dataElement;
     process.stdin.pause();
   };
-}
+};

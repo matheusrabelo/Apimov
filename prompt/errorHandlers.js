@@ -1,5 +1,5 @@
 export default {
-    readerErrorHandler, buildErrorHandler, writeErrorHandler
+    readerErrorHandler, buildErrorHandler, writeErrorHandler,
 };
 
 function readerErrorHandler(e) {

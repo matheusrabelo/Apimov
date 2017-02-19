@@ -1,6 +1,6 @@
 export default {
-    "file": "app.js",
-    "source": `"use strict";
+    'file': 'app.js',
+    'source': `"use strict";
 
 import express from "express";
 import router from "./router";

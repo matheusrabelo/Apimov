@@ -1,39 +1,41 @@
-"use strict";
+'use strict';
 
-import path from "path";
-import fs from "fs";
-import mkdirp from "mkdirp";
-import process from "process";
+import path from 'path';
+import fs from 'fs';
+import mkdirp from 'mkdirp';
+import process from 'process';
 
-export default class Writer{
+export default class Writer {
 
-    constructor(app){
+    constructor(app) {
         this.config = app.config;
         this.api = app.api;
     }
 
-    writeFile(src, file){
-        mkdirp(src, err => { 
-            if (err) throw new Error("Failed to create directory " + src + ": " + err.message);
-            fs.writeFile(path.join(src, file.file), file.source, { "flag" : "w+" } , (err) => {
-                if (err) throw new Error("Failed to write " + file.file + ": " + err.message);
+    writeFile(src, file) {
+        mkdirp(src, (err) => {
+            if (err) throw new Error('Failed to create directory ' +
+                src + ': ' + err.message);
+            fs.writeFile(path.join(src, file.file), file.source, {'flag': 'w+'},
+            (err) => {
+                if (err) throw new Error('Failed to write ' +
+                    file.file + ': ' + err.message);
             });
         });
     }
 
-    writeFiles(){
+    writeFiles() {
         let src = path.join(process.cwd(), this.config.src);
         for (let prop in this.api) {
-            if(Array.isArray(this.api[prop])){
-                this.api[prop].forEach(item => {
-                    if(item.source != undefined){
+            if (Array.isArray(this.api[prop])) {
+                this.api[prop].forEach((item) => {
+                    if (item.source) {
                         this.writeFile(path.join(src, prop), item);
                     }
                 });
-            }else{
+            } else {
                 this.writeFile(src, this.api[prop]);
             }
         }
     }
-
 }

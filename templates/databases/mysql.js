@@ -1,7 +1,6 @@
 export default (app) => {
-
     let Resource = app.config.resource.name;
-    let Properties = "";
+    let Properties = '';
     app.config.resource.atributes.forEach((item, i) => {
         let comma = ',';
         if (i === app.config.resource.atributes.length - 1) {
@@ -12,14 +11,16 @@ export default (app) => {
     });
     let resource = Resource.toLowerCase();
 
-    let model =  `
+    let model = `
     "use strict";
 
     import Sequelize from "sequelize";
     import configuration from "../configuration.json";
     import logging from "./logging";
 
-    let sequelize = new Sequelize(configuration.mySQL.db, configuration.mySQL.user, configuration.mySQL.password, {
+    let sequelize = new Sequelize(configuration.mySQL.db, 
+        configuration.mySQL.user, 
+        configuration.mySQL.password, {
         host: configuration.mySQL.host,
         dialect: 'mysql',
         logging: logging,
@@ -98,16 +99,15 @@ export default (app) => {
     `;
 
     return {
-        "model": {
-            "file": "model.js",
-            "source": model
+        'model': {
+            'file': 'model.js',
+            'source': model,
         },
-        "methods": { 
-            "post": create, 
-            "delete": remove, 
-            "getByID": getByID, 
-            "get": get
-        }
+        'methods': {
+            'post': create,
+            'delete': remove,
+            'getByID': getByID,
+            'get': get,
+        },
     };
-
 };
