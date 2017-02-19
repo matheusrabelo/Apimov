@@ -1,0 +1,22 @@
+{
+  "src": "test/booksapi",
+  "database": "mysql",
+  "middlewares": [
+    "helmet"
+  ],
+  "resource": {
+    "name": "Testing",
+    "atributes": [
+      {
+        "name": "title",
+        "dataType": "Sequelize.STRING",
+        "routes": [
+          "GET",
+          "GETBYID",
+          "POST",
+          "DELETE"
+        ]
+      }
+    ]
+  }
+}

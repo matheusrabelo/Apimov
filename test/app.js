@@ -3,65 +3,53 @@ import Chai from "chai";
 import * as AppExpect from "./app-expect";
 import rimraf from "rimraf";
 import path from "path";
+import process from "process";
+import { copy } from './utils';
 
+const config = require("./app-config");
 const expect = Chai.expect;
 
 describe("App", () => {
 
-    let app;
+    let app, configuration;
 
     beforeEach(() => {
-        app = new App({});
+        configuration = {};
+        configuration = copy(config);
+        app = new App(configuration);
     });
 
     afterEach((done) => {
-        rimraf(path.join(__dirname, "../test/build"), () => done());
+        rimraf(path.join(process.cwd(), "test/booksapi"), () => done());
     });
 
     it("Should throw error", () => {
+        app = new App({});
         expect(() => app.build()).to.throw(Error);
     });
 
     it("Should throw error for missing resource", () => {
-        app.config.src = "../test/build/";
-        app.config.database = "mysql";
-        app.config.properties = "";
-        app.config.middlewares = new Array();
-        app.config.routes = new Array();
+        configuration.resource = null;
+        app = new App(configuration);
 
         expect(() => app.build()).to.throw(Error);
     });
 
     it("Should build mysql model", () => {
-        app.config.src = "../test/build/";
-        app.config.database = "mysql";
-        app.config.resource = "Testing";
-        app.config.properties = "";
-        app.config.middlewares = new Array();
-        app.config.routes = new Array();
+        app = new App(configuration);
         app.build();
-       
+
         expect(app.api.database[0].source).to.be.equal(AppExpect.model);
     });
 
     it("Should not build database model on missing library", () => {
-        app.config.src = "../test/build/";
-        app.config.database = "testError";
-        app.config.resource = "Testing";
-        app.config.properties = "";
-        app.config.middlewares = new Array();
-        app.config.routes = new Array();
+        configuration.database = "testMissingDatabase";
+        app = new App(configuration);
 
         expect(() => app.build()).to.throw(Error);
     });
 
     it("Should build mysql methods", () => {
-        app.config.src = "../test/build/";
-        app.config.database = "mysql";
-        app.config.resource = "Testing";
-        app.config.properties = "";
-        app.config.middlewares = new Array();
-        app.config.routes = new Array();
         app.build();
 
         expect(app.database.methods.post).to.be.equal(AppExpect.mysql.create);
@@ -71,72 +59,42 @@ describe("App", () => {
     });
 
     it("Should build routes", () => {
-        app.config.src = "../test/build/";
-        app.config.database = "mysql";
-        app.config.resource = "Testing";
-        app.config.properties = "";
-        app.config.middlewares = new Array();
-        app.config.routes = ["post", "delete", "get"];
         app.build();
 
-        expect(app.api.routes[0].source).to.be.equal(AppExpect.routes[0]);
-        expect(app.api.routes[1].source).to.be.equal(AppExpect.routes[1]);
-        expect(app.api.routes[2].source).to.be.equal(AppExpect.routes[2]);
+        expect(app.api.routes[2].source).to.be.equal(AppExpect.routes[0]);
+        expect(app.api.routes[3].source).to.be.equal(AppExpect.routes[1]);
+        expect(app.api.routes[0].source).to.be.equal(AppExpect.routes[2]);
     });
 
     it("Should not build routes on missing library", () => {
-        app.config.src = "../test/build/";
-        app.config.database = "mysql";
-        app.config.resource = "Testing";
-        app.config.properties = "";
-        app.config.middlewares = new Array();
-        app.config.routes = ["post", "delete", "get", "testError"];
+        configuration.resource.atributes[0].routes.push("testMissingRoute");
+        app = new App(configuration);
         
         expect(() => app.build()).to.throw(Error);
     });
 
     it("Should build router", () => {
-        app.config.src = "../test/build/";
-        app.config.database = "mysql";
-        app.config.resource = "Testing";
-        app.config.properties = "";
-        app.config.middlewares = ["helmet", "morgan"];
-        app.config.routes = ["post", "delete", "get", "getByID"];
-
         app.build();
 
         expect(app.api.app[1].source).to.be.equal(AppExpect.router);
     });
 
     it("Should not build router on missing library", () => {
-        app.config.src = "../test/build/";
-        app.config.database = "mysql";
-        app.config.resource = "Testing";
-        app.config.properties = "";
-        app.config.middlewares = ["helmet", "morgan"];
-        app.config.routes = ["post", "delete", "get", "testError"];
+        configuration.resource.atributes[0].routes.push("testMissingRoute");
+        app = new App(configuration);
 
         expect(() => app.build()).to.throw(Error);
     });
 
     it("Should build empty array of middlewares", () => {
-        app.config.src = "../test/build/";
-        app.config.database = "mysql";
-        app.config.resource = "Testing";
-        app.config.properties = "";
-        app.config.middlewares = [];
-        app.build();
+        configuration.middlewares = [];
+        app.build(configuration);
 
         expect(app.api.middlewares).to.be.a('array');
         expect(app.api.middlewares.length).to.be.equal(0);
     });
 
     it("Should build middlewares", () => {
-        app.config.src = "../test/build/";
-        app.config.database = "mysql";
-        app.config.resource = "Testing";
-        app.config.properties = "";
-        app.config.middlewares = ["helmet"];
         app.build();
 
         expect(app.api.middlewares).to.be.a('array');
@@ -147,13 +105,9 @@ describe("App", () => {
     });
 
     it("Should not build middlewares on missing library", () => {
-        app.config.src = "../test/build/";
-        app.config.database = "mysql";
-        app.config.resource = "Testing";
-        app.config.properties = "";
-        app.config.middlewares = ["helmet", "testError"];
+        configuration.middlewares.push("testMissingMiddleware");
+        app = new App(configuration);
 
         expect(() => app.build()).to.throw(Error);
     });
-
 });
