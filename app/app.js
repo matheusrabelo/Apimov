@@ -28,8 +28,7 @@ export default class App{
             this.api.database.push(this.database.model);
           }
           catch(e){
-            throw e;
-            // throw new Error("Missing Database library for: " + database);
+            throw new Error("Missing Database library for: " + database);
           }
         }
     }
