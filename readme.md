@@ -36,6 +36,7 @@ All Apimov server's are built using our template system. You can create your own
 
 ## Scripts
 - Use **npm run start** to run nodemon
+- Use **npm run lint** to run eslint
 - Use **npm run test** to run tests
 - Use **npm run coverage** to get test coverage
 
