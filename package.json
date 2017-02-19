@@ -1,12 +1,13 @@
 {
   "name": "apimov",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Superheroic NodeJS web API Generator",
   "main": "index.js",
   "scripts": {
     "apimov": "node_modules/.bin/babel-node program.js init",
     "start": "node_modules/.bin/nodemon program.js init --exec babel-node",
     "test": "node_modules/.bin/_mocha --compilers js:babel-register",
+    "lint": "node_modules/.bin/eslint . --ignore-path .gitignore",
     "coverage": "node_modules/.bin/babel-node node_modules/babel-istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- test --recursive",
     "coveralls": "node_modules/.bin/babel-node node_modules/babel-istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- test --recursive && cat coverage/lcov.info | coveralls"
   },
@@ -37,6 +38,8 @@
     "colors": "^1.1.2",
     "commander": "^2.9.0",
     "coveralls": "^2.11.15",
+    "eslint": "^3.15.0",
+    "eslint-config-google": "^0.7.1",
     "mkdirp": "^0.5.1",
     "mocha": "^3.1.2",
     "nodemon": "^1.11.0",
