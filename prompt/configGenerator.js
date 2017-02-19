@@ -3,7 +3,8 @@ import 'colors';
 
 export default (config) => {
   return function* () {
-    let atributesVar, atributesBoolean;
+    let atributesVar;
+    let atributesBoolean; // eslint-disable-line no-unused-vars
     console.log('Welcome to Apimov!'.blue);
     console.log('Please fill in the configuration.'.blue);
     config.src = yield prompt('Source Directory: ');
