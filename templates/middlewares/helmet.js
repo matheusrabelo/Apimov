@@ -1,6 +1,6 @@
 export default () => {
     return {
-        "import": `helmet`,
-        "use": `helmet()`
-    }
+        'import': `helmet`,
+        'use': `helmet()`,
+    };
 };

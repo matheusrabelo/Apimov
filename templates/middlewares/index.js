@@ -1,6 +1,6 @@
-import helmet from "./helmet";
-import morgan from "./morgan";
+import helmet from './helmet';
+import morgan from './morgan';
 
 export default {
-    helmet, morgan
+    helmet, morgan,
 };

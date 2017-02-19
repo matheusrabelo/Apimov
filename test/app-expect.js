@@ -1,11 +1,13 @@
-export const model =  `
+export const model = `
     "use strict";
 
     import Sequelize from "sequelize";
     import configuration from "../configuration.json";
     import logging from "./logging";
 
-    let sequelize = new Sequelize(configuration.mySQL.db, configuration.mySQL.user, configuration.mySQL.password, {
+    let sequelize = new Sequelize(configuration.mySQL.db, 
+        configuration.mySQL.user, 
+        configuration.mySQL.password, {
         host: configuration.mySQL.host,
         dialect: 'mysql',
         logging: logging,
@@ -84,7 +86,12 @@ export const mySQLGet = `
         });
     `;
 
-export const mysql = { "create": mySQLCreate, "remove" : mySQLRemove, "get": mySQLGet, "getByID": mySQLGetByID};
+export const mysql = {
+    'create': mySQLCreate,
+    'remove': mySQLRemove,
+    'get': mySQLGet,
+    'getByID': mySQLGetByID,
+};
 
 export const routes = [
 `"use strict";
@@ -107,8 +114,7 @@ export default function postTesting(req, res){
             });
     
 };
-`
-,
+`,
 `"use strict";
 
 import Testing from "../database/model";
@@ -126,8 +132,7 @@ export default function deleteTesting(req, res){
         res.json({});
     
 };
-`
-,
+`,
 `
 "use strict";
 
@@ -157,8 +162,7 @@ export default function getTesting(req, res){
         });
     
 };
-`
-,
+`,
 `
 "use strict";
 
@@ -176,8 +180,7 @@ export default function getByIDTesting(req, res){
         });
     
 };
-`
-];
+`];
 
 export const router = `
 "use strict";

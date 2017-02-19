@@ -1,6 +1,6 @@
 export default {
-    "file": "index.js",
-    "source": `'use strict';
+    'file': 'index.js',
+    'source': `'use strict';
 
 import app from "./app/app";
 import configuration from "./configuration";

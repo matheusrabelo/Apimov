@@ -1,10 +1,10 @@
-"use strict";
+'use strict';
 
-import Program from "commander";
-import Prompt from "./prompt";
+import Program from 'commander';
+import Prompt from './prompt';
 
 Program
-  .version('0.0.1')
+  .version('0.1.1');
 
 Program
   .command('init')
@@ -19,6 +19,6 @@ Program
 Program
   .command('*')
   .description('Uknown option')
-  .action(() => {console.log("Unknown option")});
+  .action(() => console.log('Unknown option'));
 
 Program.parse(process.argv);

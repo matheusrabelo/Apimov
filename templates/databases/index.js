@@ -1,5 +1,5 @@
-import mysql from "./mysql";
+import mysql from './mysql';
 
 export default {
-    mysql
+    mysql,
 };

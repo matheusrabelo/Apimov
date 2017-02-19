@@ -1,17 +1,17 @@
-import App from "../app/app";
-import Chai from "chai";
-import * as AppExpect from "./app-expect";
-import rimraf from "rimraf";
-import path from "path";
-import process from "process";
-import { copy } from './utils';
+import App from '../app/app';
+import Chai from 'chai';
+import * as AppExpect from './app-expect';
+import rimraf from 'rimraf';
+import path from 'path';
+import process from 'process';
+import {copy} from './utils';
 
-const config = require("./app-config");
+const config = require('./app-config');
 const expect = Chai.expect;
 
-describe("App", () => {
-
-    let app, configuration;
+describe('Apimov', () => {
+    let app;
+    let configuration;
 
     beforeEach(() => {
         configuration = {};
@@ -20,45 +20,46 @@ describe("App", () => {
     });
 
     afterEach((done) => {
-        rimraf(path.join(process.cwd(), "test/booksapi"), () => done());
+        rimraf(path.join(process.cwd(), 'test/booksapi'), () => done());
     });
 
-    it("Should throw error", () => {
+    it('Should throw error', () => {
         app = new App({});
         expect(() => app.build()).to.throw(Error);
     });
 
-    it("Should throw error for missing resource", () => {
+    it('Should throw error for missing resource', () => {
         configuration.resource = null;
         app = new App(configuration);
 
         expect(() => app.build()).to.throw(Error);
     });
 
-    it("Should build mysql model", () => {
+    it('Should build mysql model', () => {
         app = new App(configuration);
         app.build();
 
         expect(app.api.database[0].source).to.be.equal(AppExpect.model);
     });
 
-    it("Should not build database model on missing library", () => {
-        configuration.database = "testMissingDatabase";
+    it('Should not build database model on missing library', () => {
+        configuration.database = 'testMissingDatabase';
         app = new App(configuration);
 
         expect(() => app.build()).to.throw(Error);
     });
 
-    it("Should build mysql methods", () => {
+    it('Should build mysql methods', () => {
         app.build();
 
         expect(app.database.methods.post).to.be.equal(AppExpect.mysql.create);
         expect(app.database.methods.delete).to.be.equal(AppExpect.mysql.remove);
         expect(app.database.methods.get).to.be.equal(AppExpect.mysql.get);
-        expect(app.database.methods.getById).to.be.equal(AppExpect.mysql.getById);
+        expect(app.database.methods.getById)
+            .to.be.equal(AppExpect.mysql.getById);
     });
 
-    it("Should build routes", () => {
+    it('Should build routes', () => {
         app.build();
 
         expect(app.api.routes[2].source).to.be.equal(AppExpect.routes[0]);
@@ -66,27 +67,27 @@ describe("App", () => {
         expect(app.api.routes[0].source).to.be.equal(AppExpect.routes[2]);
     });
 
-    it("Should not build routes on missing library", () => {
-        configuration.resource.atributes[0].routes.push("testMissingRoute");
+    it('Should not build routes on missing library', () => {
+        configuration.resource.atributes[0].routes.push('testMissingRoute');
         app = new App(configuration);
-        
+
         expect(() => app.build()).to.throw(Error);
     });
 
-    it("Should build router", () => {
+    it('Should build router', () => {
         app.build();
 
         expect(app.api.app[1].source).to.be.equal(AppExpect.router);
     });
 
-    it("Should not build router on missing library", () => {
-        configuration.resource.atributes[0].routes.push("testMissingRoute");
+    it('Should not build router on missing library', () => {
+        configuration.resource.atributes[0].routes.push('testMissingRoute');
         app = new App(configuration);
 
         expect(() => app.build()).to.throw(Error);
     });
 
-    it("Should build empty array of middlewares", () => {
+    it('Should build empty array of middlewares', () => {
         configuration.middlewares = [];
         app.build(configuration);
 
@@ -94,18 +95,18 @@ describe("App", () => {
         expect(app.api.middlewares.length).to.be.equal(0);
     });
 
-    it("Should build middlewares", () => {
+    it('Should build middlewares', () => {
         app.build();
 
         expect(app.api.middlewares).to.be.a('array');
         app.api.middlewares.forEach((item) => {
-          expect(item.import).to.not.be.a("undefined");
-          expect(item.use).to.not.be.a("undefined");
+          expect(item.import).to.not.be.a('undefined');
+          expect(item.use).to.not.be.a('undefined');
         });
     });
 
-    it("Should not build middlewares on missing library", () => {
-        configuration.middlewares.push("testMissingMiddleware");
+    it('Should not build middlewares on missing library', () => {
+        configuration.middlewares.push('testMissingMiddleware');
         app = new App(configuration);
 
         expect(() => app.build()).to.throw(Error);
