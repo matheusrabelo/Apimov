@@ -26,7 +26,7 @@ const fail = (err) => {
 };
 
 console.log(line);
-console.log('Initiliazing Apimov CLI stable 1.0.0');
+console.log('Initiliazing Apimov CLI stable');
 console.log(line);
 
 try {
