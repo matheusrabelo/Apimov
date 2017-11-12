@@ -1,7 +1,7 @@
 {
   "name": "apimov",
-  "version": "1.0.0",
-  "description": "apimov",
+  "version": "1.0.1",
+  "description": "Superheroic NodeJS web API Generator",
   "main": "index.js",
   "bin": {
     "apimov": "cli.js"
