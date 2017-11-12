@@ -4,7 +4,7 @@
 Ultra lightweight library to generate internal APIs.
 
 ## About
-From now, you can create an API just with SQL queries and a single json file.
+From now on, you can create an API just with SQL queries and a single json file.
 
 ## Usage
 Create your own **apimov.json** with your API spec.
@@ -45,8 +45,8 @@ The **apimov.json** has the following structure:
 ```
 
 ## Example
-This repo has an example of usage, just with **queries/** folder and the **apimov.json**, you can start an API by running the **Apimov CLI**.
-Fork/clone this repo and try to do this on **example/** folder.
+This repo has an usage example, with just the **queries/** folder and the **apimov.json**, you can start an API by running the **Apimov CLI**.
+Fork/clone this repo and try to do this on the **example/** folder.
 
 ## Relevant infos
 1. All queries are executed on PostgreSQL.
@@ -54,14 +54,16 @@ If you are getting started with it, you can try:
 ```
 https://www.postgresql.org/download/
 https://www.pgadmin.org/
+```
 or just
+```
 https://www.elephantsql.com/
 ```
 
 2. The driver used is [**pg**](https://node-postgres.com/).
 Configurations and queries contracts are the same avaiable on it.
 
-3. Apimov unrolls and concats params, query strings and body (in this order) before querying. Don't forget that your queries should to consider it. The apimov source code is:
+3. Apimov unrolls and concats params, query strings and body (in this order) before querying. Don't forget that your queries should consider it. The apimov source code is:
 ```
 ...
 const body = Object.values(reqBody);
