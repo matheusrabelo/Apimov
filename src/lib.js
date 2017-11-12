@@ -37,7 +37,7 @@ const checkPooling = () => {
     pool.connect()
         .then((client) => client.query('SELECT NOW();'))
         .then((data) => (data.rows))
-        .then(([row]) => console.log('Connected with db in ' + row.now))
+        .then(([row]) => console.log(`Connected with db in ${row.now}`))
         .catch((err) => console.log('Failed to connect with db'));
 };
 
@@ -50,7 +50,7 @@ const run = (api, appPort) => {
     api.routes.forEach(registerRoute);
     app.use('*', (req, res) =>
         res.status(404).json());
-    app.listen(port, () => console.log('Listening on ' + port));
+    app.listen(port, () => console.log(`Listening on ${port}`));
 };
 
 module.exports = {
