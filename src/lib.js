@@ -46,11 +46,11 @@ const run = (api, appPort) => {
     app.use(bodyParser.json());
     app.use(morgan('tiny'));
     pool = new pg.Pool(api.config);
-    checkPooling();
-    api.routes.forEach(registerRoute);
-    app.use('*', (req, res) =>
-        res.status(404).json());
-    app.listen(port, () => console.log(`Listening on ${port}`));
+    checkPooling().then(() => {
+        api.routes.forEach(registerRoute);
+        app.use('*', (req, res) => res.status(404).json());
+        app.listen(port, () => console.log(`Listening on ${port}`));
+    });
 };
 
 module.exports = {
