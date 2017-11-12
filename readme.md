@@ -73,5 +73,5 @@ const queryParams =
 Contributions, stars and feedbacks are always welcome
 
 ## Authors
-- Leonardo Teixeira Menezes
-- Matheus Freire Rabelo
+- Leonardo Menezes ([@LTMenezes](https://github.com/LTMenezes))
+- Matheus Rabelo ([@matheusrabelo](https://github.com/matheusrabelo))
