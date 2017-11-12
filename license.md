@@ -1,6 +1,6 @@
 The MIT License
 
-Copyright (c) 2016 
+Copyright (c) 2016-2017
 
 Leonardo Menezes (leonardotmenezes@gmail.com)
 Matheus Rabelo (matheusfreirerabelo@gmail.com) 

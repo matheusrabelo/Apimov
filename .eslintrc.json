@@ -1,0 +1,14 @@
+{
+    "extends": "google",
+    "env": {
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 6
+    },
+    "rules": {
+        "require-jsdoc": "off",
+        "linebreak-style": "off",
+        "object-curly-spacing": "off"
+    }
+}

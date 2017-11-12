@@ -1,0 +1,36 @@
+{
+    "config": {
+        "host": "baasu.db.elephantsql.com",
+        "database": "userdatabase",
+        "user": "userdatabase",
+        "password": "password",
+        "port": 5432
+    },
+    "routes": [
+        {
+            "path": "/actions/create-invoices",
+            "method": "GET",
+            "query": "queries/create-invoices-table.sql"
+        },
+        {
+            "path": "/actions/drop-invoices",
+            "method": "GET",
+            "query": "queries/drop-invoices-table.sql"
+        },
+        {
+            "path": "/invoices/:invoiceId",
+            "method": "GET",
+            "query": "queries/get-invoice-by-id.sql"
+        },
+        {
+            "path": "/invoices",
+            "method": "GET",
+            "query": "queries/get-invoices.sql"
+        },
+        {
+            "path": "/invoices",
+            "method": "POST",
+            "query": "queries/create-invoice.sql"
+        }
+    ]
+}

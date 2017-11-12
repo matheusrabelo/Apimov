@@ -1,45 +1,76 @@
 # Apimov
+[![npm version](https://badge.fury.io/js/apimov.svg)](https://badge.fury.io/js/apimov) 
 
-[![npm version](https://badge.fury.io/js/apimov.svg)](https://badge.fury.io/js/apimov) [![Build Status](https://travis-ci.org/matheusrabelo/Apimov.svg?branch=master)](https://travis-ci.org/matheusrabelo/Apimov) [![Coverage Status](https://coveralls.io/repos/github/matheusrabelo/Apimov/badge.svg?branch=master)](https://coveralls.io/github/matheusrabelo/Apimov?branch=master)
+Ultra lightweight library to generate internal APIs.
 
 ## About
-
-A minimalist, extensible Node.js REST API Generator.
-
-Apimov creates fully tested node servers. You specify the desired middleware's, data elements, database and Apimov creates the server on your behalf.
-
-Less time coding, more time doing what you love.  
-
-
-## Installation
-
-This library is distributed on **npm**. To install, run the following command:
-
-``` bash
-$ npm install apimov -g
-```
+From now, you can create an API just with SQL queries and a single json file.
 
 ## Usage
+Create your own **apimov.json** with your API spec.
 
-```bash
-$ apimov init #Create an apimov config file and build it
-$ apimov build #Build an apimov server from an existing apimov config file
+Run the following command:
+```
+$ npm install apimov -g
+$ apimov
+``` 
+
+This command will find and mount an API via **apimov.json**
+
+## Creating an apimov.json
+The **apimov.json** has the following structure:
+```
+{
+    "config": {
+        "host": "localhost",
+        "user": "admin",
+        "database": "invoices-db",
+        "port": 5432,
+        ...
+    },
+    "routes": [
+        {
+            "path": "/invoices/:invoiceId",
+            "method": "GET",
+            "query": "queries/get-invoice-by-id.sql"
+        },
+        {
+            "path": "/invoices",
+            "method": "GET",
+            "query": "queries/get-invoices.sql"
+        }
+        ...
+    ]
+}
 ```
 
-![Usage](usage.gif)
+## Example
+This repo has an example of usage, just with **queries/** folder and the **apimov.json**, you can start an API by running the **Apimov CLI**.
+Fork/clone this repo and try to do this on **example/** folder.
 
-The generated API is on specified destination folder.
+## Relevant infos
+1. All queries are executed on PostgreSQL.
+If you are getting started with it, you can try:
+```
+https://www.postgresql.org/download/
+https://www.pgadmin.org/
+or just
+https://www.elephantsql.com/
+```
+
+2. The driver used is [**pg**](https://node-postgres.com/).
+Configurations and queries contracts are the same avaiable on it.
+
+3. Apimov unrolls and concats params, query strings and body (in this order) before querying. Don't forget that your queries should to consider it. The apimov source code is:
+```
+...
+const body = Object.values(reqBody);
+const queryParams =
+        [].concat(params, queryString, body);
+```
 
 ## Contribute
-You can collaborate with Apimov by creating a fork and submitting a pull request.
-
-All Apimov server's are built using our template system. You can create your own templates to use locally or to submit to the community by sending a PR to us.
-
-## Scripts
-- Use **npm run start** to run nodemon
-- Use **npm run lint** to run eslint
-- Use **npm run test** to run tests
-- Use **npm run coverage** to get test coverage
+Contributions, stars and feedbacks are always welcome
 
 ## Authors
 - Leonardo Teixeira Menezes

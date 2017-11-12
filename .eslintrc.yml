@@ -1,8 +1,0 @@
-extends: google
-installedESLint: true
-parserOptions:
-    ecmaVersion: 6
-    sourceType: module
-rules:
-    JSDoc: 0
-    require-jsdoc: 0

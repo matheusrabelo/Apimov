@@ -1,3 +1,2 @@
-import app from './app/app';
-
-export default app;
+const apimov = require('./src/lib');
+module.exports = apimov;
