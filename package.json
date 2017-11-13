@@ -1,6 +1,6 @@
 {
   "name": "apimov",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Superheroic NodeJS web API Generator",
   "main": "index.js",
   "bin": {
